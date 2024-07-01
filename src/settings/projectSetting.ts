@@ -116,7 +116,7 @@ const setting: ProjectConfig = {
   // 多标签
   multiTabsSetting: {
     // 刷新后是否保留已经打开的标签页
-    cache: false,
+    cache: true,
     // 开启
     show: true,
     // 显示图标

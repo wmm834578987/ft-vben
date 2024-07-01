@@ -185,7 +185,6 @@
 import { reactive, ref, VueElement, h, watch, toRaw } from 'vue';
 import { MailOutlined, AppstoreOutlined, SettingOutlined } from '@ant-design/icons-vue';
 import { message, Modal, NotificationPlacement, notification } from 'ant-design-vue';
-import Table from './Table.vue'
 import { ColorPicker } from "vue3-colorpicker";
 import "vue3-colorpicker/style.css";
 import Title from './Title.vue';

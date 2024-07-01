@@ -63,7 +63,6 @@ async function bootstrap() {
   }
   app.component("Button",Button)
   app.component("BasicTable",BasicTable)
-  app.component("BasicForm",BasicForm)
   app.config.warnHandler = () => null
   app.mount('#app')
 }

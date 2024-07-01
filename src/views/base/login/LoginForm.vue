@@ -105,7 +105,7 @@ async function handleLogin(params) {
       }
       catch (e) { }
     })
-    router.push('/dashboard')  //wangmm
+    router.push('/dashboard/demo')  //wangmm
     return
     const userInfo = await userStore.login({
       password: data.password,

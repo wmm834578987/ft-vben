@@ -3,9 +3,8 @@ import type { App } from 'vue'
 
 import { createRouter, createWebHistory, createWebHashHistory } from 'vue-router'
 import { basicRoutes } from './routes'
+import {userRouter} from "./routes/userRouter"
 
-import { LAYOUT } from '@/router/constant'
-import { t } from '@/hooks/web/useI18n'
 // 白名单应该包含基本静态路由
 const WHITE_NAME_LIST: string[] = []
 function getRouteNames(array: any[]) {
@@ -15,7 +14,6 @@ function getRouteNames(array: any[]) {
   })
 }
 getRouteNames(basicRoutes);
-console.log(basicRoutes, 'basicRoutes');
 
 let basicRoute = 
   [
@@ -74,31 +72,11 @@ let basicRoute =
         }
       ]
     },
-    {
-      path: '/dashboard',
-      name: 'Dashboard',
-      component: LAYOUT,
-      parentId: 0,
-      redirect: '/dashboard/demo',
-      meta: {
-        orderNo: 10,
-        icon: 'ant-design:home-outlined',
-        title: t('routes.dashboard.dashboard'),
-      },
-      children: [
-
-        {
-          path: 'demo',
-          name: 'demo',
-          component: () => import('@/views/dashboard/demo/index.vue'),
-          meta: {
-            title:"示例",
-            icon: 'ant-design:appstore-outlined',
-          },
-        }
-      ],
-    }
+    userRouter
 ]
+
+console.log(basicRoute, 'basicRoute');
+
 // app router
 // 创建一个可以被 Vue 应用程序使用的路由实例
 export const router = createRouter({

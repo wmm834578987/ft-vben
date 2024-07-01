@@ -39,7 +39,9 @@ const go = useGo()
 const { getShowQuick, getShowRedo, getShowFold } = useMultipleTabSetting()
 
 const getTabsState = computed(() => {
-  return tabStore.getTabList.filter(item => !item.meta?.hideTab)
+  let list= tabStore.getTabList.filter(item => !item.meta?.hideTab)
+  console.log(list)
+  return list
 })
 
 const unClose = computed(() => unref(getTabsState).length === 1)
@@ -57,8 +59,10 @@ const getWrapClass = computed(() => {
 })
 
 listenerRouteChange((route) => {
-  const { name } = route
-  if (name === REDIRECT_NAME || !route || !userStore.getAccessToken)
+  const { name } = route;
+  console.log(name,'name  ==>暂不校验权限')
+  // || !userStore.getAccessToken  //暂不校验权限wangmm
+  if (name === REDIRECT_NAME || !route )
     return
 
   const { path, fullPath, meta = {} } = route

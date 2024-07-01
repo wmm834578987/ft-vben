@@ -236,9 +236,9 @@ export const usePermissionStore = defineStore('app-permission', {
           routeList = routeList.filter(routeRemoveIgnoreFilter)
           routeList = flatMultiLevelRoutes(routeList)
           routes = [PAGE_NOT_FOUND_ROUTE, dashboard, ...routeList]
+      console.log(routes, '======>routeList1  删除了一些作者的路由')
           break
       }
-
       // 从用户中获取权限
       if (userInfo)
         this.setPermCodeList(userInfo.permissions)
