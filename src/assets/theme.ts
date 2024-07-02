@@ -1,8 +1,8 @@
 export default {
-  "colorPrimary": "#ffbb29",
-  "colorSuccess": "blue",
-  "colorWarning": "aqua",
-  "colorInfo": "pink",
-  "colorError":"red",
+  "colorPrimary": "#409eff",
+  "colorSuccess": "#67c23a",
+  "colorWarning": "#E6A23C",
+  "colorInfo": "#79bbff",
+  "colorError":"#f56c56",
 
 }

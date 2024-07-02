@@ -38,21 +38,17 @@ export function useUploadType({
     const helpText = unref(helpTextRef)
     if (helpText)
       return helpText
-
     const helpTexts: string[] = []
-
     const accept = unref(acceptRef)
     if (accept.length > 0)
       helpTexts.push(t('component.upload.accept', [accept.join(',')]))
-
     const maxSize = unref(maxSizeRef)
     if (maxSize)
       helpTexts.push(t('component.upload.maxSize', [maxSize]))
 
     const maxNumber = unref(maxNumberRef)
     if (maxNumber && maxNumber !== Number.POSITIVE_INFINITY)
-      helpTexts.push(t('component.upload.maxNumber', [maxNumber]))
-
+    helpTexts.push(t('component.upload.maxNumber', [maxNumber]))
     return helpTexts.join('，')
   })
   return { getAccept, getStringAccept, getHelpText }

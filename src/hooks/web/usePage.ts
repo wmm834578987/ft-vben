@@ -42,12 +42,13 @@ export function useRedo(_router?: Router) {
       if (name && Object.keys(params).length > 0) {
         params._origin_params = JSON.stringify(params ?? {})
         params._redirect_type = 'name'
-        params.path = String(name)
+        params.path = decodeURIComponent(String(name))
       }
       else {
         params._redirect_type = 'path'
         params.path = fullPath
       }
+      console.log(params,'===>path')
       replace({ name: REDIRECT_NAME, params, query }).then(() => resolve(true))
     })
   }

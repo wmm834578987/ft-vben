@@ -14,14 +14,15 @@ export let i18n: ReturnType<typeof createI18n>
 async function createI18nOptions(): Promise<I18nOptions> {
   const localeStore = useLocaleStoreWithOut()
   const locale = localeStore.getLocale
-  const defaultLocal = await import(`./lang/${locale}.ts`)
+  console.log(locale,'locale')
+
+  const defaultLocal = await import(`./lang/${locale}.ts`);
   const message = defaultLocal.default?.message ?? {}
 
   setHtmlPageLang(locale)
   setLoadLocalePool((loadLocalePool) => {
     loadLocalePool.push(locale)
   })
-
   return {
     legacy: false,
     locale,
@@ -39,7 +40,8 @@ async function createI18nOptions(): Promise<I18nOptions> {
 
 // setup i18n instance with glob
 export async function setupI18n(app: App<Element>) {
-  const options = await createI18nOptions()
+  const options = await createI18nOptions();
+  console.log(options,'options')
   i18n = createI18n(options)
   app.use(i18n)
 }

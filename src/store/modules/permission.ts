@@ -148,7 +148,7 @@ export const usePermissionStore = defineStore('app-permission', {
                 homePath = route.redirect! as string
               }
               else {
-                route.meta = Object.assign({}, route.meta, { affix: true })
+                route.meta = Object.assign({}, route.meta, { affix: false })
                 throw new Error('end')
               }
             }

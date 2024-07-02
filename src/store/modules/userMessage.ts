@@ -16,9 +16,6 @@ export const useUserMessageStore = defineStore('userMessage', {
   },
   actions: {
     // 更新未读消息的数量
-    async updateUnreadCount() {
-      const count = await getUnreadNotifyMessageCount()
-      this.unreadCount = count
-    },
+
   },
 })

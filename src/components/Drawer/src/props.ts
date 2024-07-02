@@ -15,7 +15,7 @@ export const footerProps = {
    */
   showOkBtn: { type: Boolean, default: true },
   okButtonProps: Object as PropType<Recordable>,
-  okText: { type: String, default: t('common.okText') },
+  okText: { type: String, default:  t('common.okText') },
   okType: { type: String, default: 'primary' },
   showFooter: { type: Boolean },
   footerHeight: {

@@ -4,7 +4,7 @@ import type { App } from 'vue'
 import { createRouter, createWebHistory, createWebHashHistory } from 'vue-router'
 import { basicRoutes } from './routes'
 import {userRouter} from "./routes/userRouter"
-
+import { PAGE_NOT_FOUND_ROUTE, REDIRECT_ROUTE } from '@/router/routes/basic'
 // 白名单应该包含基本静态路由
 const WHITE_NAME_LIST: string[] = []
 function getRouteNames(array: any[]) {
@@ -72,7 +72,10 @@ let basicRoute =
         }
       ]
     },
-    userRouter
+    userRouter,
+    PAGE_NOT_FOUND_ROUTE,
+    REDIRECT_ROUTE
+
 ]
 
 console.log(basicRoute, 'basicRoute');

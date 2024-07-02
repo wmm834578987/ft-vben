@@ -83,11 +83,10 @@ export const useMultipleTabStore = defineStore('app-multiple-tab', {
       const { currentRoute } = router
       const route = unref(currentRoute)
       const name = route.name
-
       const findTab = this.getCachedTabList.find(item => item === name)
-      if (findTab)
+      if (findTab){
         this.cacheTabList.delete(findTab)
-
+      }
       const redo = useRedo(router)
       await redo()
     },
@@ -252,14 +251,14 @@ export const useMultipleTabStore = defineStore('app-multiple-tab', {
     // Close the tab on the right and jump
     closeLeftTabs(route: RouteLocationNormalized, router: Router) {
       const index = this.tabList.findIndex(item => item.path === route.path)
-
+      console.log(index,'index')
       if (index > 0) {
         const leftTabs = this.tabList.slice(0, index)
         const pathList: string[] = []
         for (const item of leftTabs) {
           const affix = item?.meta?.affix ?? false
           if (!affix)
-            pathList.push(item.fullPath)
+            pathList.push(item.fullPath)  //wangmm
         }
         this.bulkCloseTabs(pathList)
       }
@@ -273,9 +272,9 @@ export const useMultipleTabStore = defineStore('app-multiple-tab', {
 
       if (index >= 0 && index < this.tabList.length - 1) {
         const rightTabs = this.tabList.slice(index + 1, this.tabList.length)
-
         const pathList: string[] = []
         for (const item of rightTabs) {
+          console.log(item?.meta?.affix,'item?.meta?.affix')
           const affix = item?.meta?.affix ?? false
           if (!affix)
             pathList.push(item.fullPath)
@@ -287,7 +286,7 @@ export const useMultipleTabStore = defineStore('app-multiple-tab', {
     },
 
     closeAllTab(router: Router) {
-      this.tabList = this.tabList.filter(item => item?.meta?.affix ?? false)
+     this.tabList = this.tabList.filter(item => item?.meta?.affix ?? false)
       this.clearCacheTabs()
       this.goToPage(router)
     },

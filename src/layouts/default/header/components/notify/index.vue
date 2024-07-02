@@ -20,7 +20,6 @@ const tips = computed<string>(() => {
 
 onMounted(async () => {
   // 通过store进行更新
-  store.updateUnreadCount()
 })
 </script>
 

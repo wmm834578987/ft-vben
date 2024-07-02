@@ -16,14 +16,13 @@ import { setupI18n } from '@/locales/setupI18n'
 import { registerGlobComp } from '@/components/registerGlobComp'
 import '@/utils/tongji'
 import * as antd from "@ant-design/icons-vue";
-import { Button } from '@/components/Button/index';
-import { BasicTable } from '@/components/Table/index';
-import { BasicForm } from '@/components/Form/index';
+
 async function bootstrap() {
   const app = createApp(App)
 
   // Configure store
   // 配置 store
+
   setupStore(app)
 
   // Initialize internal system configuration
@@ -36,10 +35,10 @@ async function bootstrap() {
 
   // Multilingual configuration
   // 多语言配置
+   await setupI18n(app)
+ 
   // Asynchronous case: language files may be obtained from the server side
   // 异步案例：语言文件可能从服务器端获取
-  await setupI18n(app)
-
   // Configure routing
   // 配置路由
   setupRouter(app)
@@ -48,9 +47,11 @@ async function bootstrap() {
   // 路由守卫
   setupRouterGuard(router)
 
+
   // Register global directive
   // 注册全局指令
   setupGlobDirectives(app)
+
 
   // Configure global error handling
   // 配置全局错误处理
@@ -61,10 +62,11 @@ async function bootstrap() {
   for (const [key, component] of Object.entries(antd)) {
     app.component(key, component)
   }
-  app.component("Button",Button)
-  app.component("BasicTable",BasicTable)
+
   app.config.warnHandler = () => null
   app.mount('#app')
+ 
+
 }
 
 bootstrap()

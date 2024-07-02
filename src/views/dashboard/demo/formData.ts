@@ -227,127 +227,52 @@ export const searchFormSchema = [
 ];
 
 
-export const columns = [
+
+
+export const columns  = [
   {
-    title: '课件ID',
-    dataIndex: 'id',
-    width: '100px',
+    title: '菜单名称',
+    dataIndex: 'name',
+    width: 250,
+    align: 'left',
   },
   {
-    title: '年份',
-    dataIndex: 'year',
-    sorter: true,
-    width: '100px',
-  },
-  {
-    title: '地区',
-    dataIndex: 'edition',
-    width: '100px',
-  },
-  {
-    title: '类型',
-    dataIndex: 'typeName',
-    width: '120px',
-    customRender: ({ text, record }) => {
-      //return text == 0 ? '正式课' : text == 1 ? '公开课' : '入学测';
+    title: '菜单类型',
+    dataIndex: 'type',
+    width: 80,
+    customRender: ({ text }) => {
+      // return useRender.renderDict(text, DICT_TYPE.SYSTEM_MENU_TYPE)
     },
   },
   {
-    title: '季度',
-    dataIndex: 'kjType',
-    width: '100px',
-    customRender: ({ text, record }) => {
-      let showstxt = '';
-      if (text == 'C1') {
-        showstxt = '春上';
-      } else if (text == 'C2') {
-        showstxt = '春下';
-      } else if (text == 'S') {
-        showstxt = '夏季';
-      } else if (text == 'Q1') {
-        showstxt = '秋上';
-      } else if (text == 'Q2') {
-        showstxt = '秋下';
-      } else if (text == 'H') {
-        showstxt = '冬季';
-      }
-      return showstxt;
+    title: '图标',
+    dataIndex: 'icon',
+    width: 60,
+    customRender: ({ record }) => {
+      // return useRender.renderIcon(record.icon)
     },
   },
   {
-    title: '年级',
-    dataIndex: 'grade',
-    sorter: true,
-    width: '100px',
-    customRender: ({ text, record }) => {
-      let showsGrade = '';
-      if (text == 'G0') {
-        showsGrade = '幼大班';
-      } else if (text == 'G1') {
-        showsGrade = '一年级';
-      } else if (text == 'G2') {
-        showsGrade = '二年级';
-      } else if (text == 'G3') {
-        showsGrade = '三年级';
-      } else if (text == 'G4') {
-        showsGrade = '四年级';
-      } else if (text == 'G5') {
-        showsGrade = '五年级';
-      } else if (text == 'G6') {
-        showsGrade = '六年级';
-      }
-      return showsGrade;
-    },
+    title: '排序',
+    dataIndex: 'sort',
+    width: 60,
   },
   {
-    title: '讲次',
-    dataIndex: 'lecture',
-    sorter: true,
-    width: '100px',
+    title: '权限标识',
+    dataIndex: 'permission',
+    width: 140,
   },
   {
-    title: '班型',
-    dataIndex: 'classType',
-    sorter: true,
-    width: '100px',
+    title: '组件路径',
+    dataIndex: 'component',
+    width: 140,
   },
   {
     title: '状态',
-    dataIndex: 'lockStatus',
-    sorter: true,
+    dataIndex: 'status',
+    width: 80,
+    customRender: ({ text }) => {
+      // return useRender.renderDict(text, DICT_TYPE.COMMON_STATUS)
+    },
   },
-  {
-    title: '课件名称',
-    dataIndex: 'lectureName',
-  },
-  {
-    title: '知识点名称',
-    dataIndex: 'knowledgeName',
-  },
-  {
-    title: '反馈',
-    dataIndex: 'feedbackCount',
-    sorter: true,
-    width: '100px',
-  },
-  {
-    title: '详情',
-    dataIndex: 'details',
-    width: '100px',
-  },
-  {
-    title: '动手挑战',
-    dataIndex: 'challenge',
-    width: '100px',
-  },
-  {
-    title: '题目表',
-    dataIndex: 'timuList',
-    width: '100px',
-  },
-  {
-    title: '更多操作',
-    dataIndex: 'mores',
-    width: '300px',
-  },
-];
+]

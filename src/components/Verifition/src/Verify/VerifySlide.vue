@@ -288,19 +288,7 @@ async function refresh() {
 
 // 请求背景图片和验证图片
 async function getPictrue() {
-  const data = {
-    captchaType: captchaType.value,
-  }
-  const res = await getCaptcha(data)
-  if (res.data.repCode === '0000') {
-    backImgBase.value = res.data.repData.originalImageBase64
-    blockBackImgBase.value = `data:image/png;base64,${res.data.repData.jigsawImageBase64}`
-    backToken.value = res.data.repData.token
-    secretKey.value = res.data.repData.secretKey
-  }
-  else {
-    tipWords.value = res.data.repMsg
-  }
+  return
 }
 </script>
 

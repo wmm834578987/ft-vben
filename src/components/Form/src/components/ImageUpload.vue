@@ -145,7 +145,6 @@ const handleBeforeUpload: UploadProps['beforeUpload'] = (file) => {
   const isLt2M = file.size / 1024 / 1024 < props.maxSize
   if (!isLt2M)
     message.error(t('component.upload.maxSizeMultiple', [props.maxSize]))
-
   if (!(isPNG && isLt2M))
     fileList.value.pop()
 

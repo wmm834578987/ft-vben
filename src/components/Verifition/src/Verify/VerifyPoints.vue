@@ -178,20 +178,7 @@ function canvasClick(e) {
 
 // 请求背景图片和验证图片
 async function getPictrue() {
-  const data = {
-    captchaType: captchaType.value,
-  }
-  const res = await getCaptcha(data)
-  if (res.data.repCode === '0000') {
-    pointBackImgBase.value = res.data.repData.originalImageBase64
-    backToken.value = res.data.repData.token
-    secretKey.value = res.data.repData.secretKey
-    poinTextList.value = res.data.repData.wordList
-    text.value = `${t('component.captcha.point')}【${poinTextList.value.join(',')}】`
-  }
-  else {
-    text.value = res.data.repMsg
-  }
+  return 
 }
 </script>
 

@@ -270,4 +270,13 @@ export const addKejian: FormSchema[] = [
     },
     required: true,
   },
+
+    {
+      required: true,
+      field: '0',
+      label: '表单增删操作',
+      slot: 'add',
+      component:"Cascader"
+    },
+
 ];

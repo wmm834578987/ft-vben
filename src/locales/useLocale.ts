@@ -33,7 +33,7 @@ export function useLocale() {
   const getShowLocalePicker = computed(() => localeStore.getShowPicker)
 
   const getAntdLocale = computed((): any => {
-    const localeMessage = i18n.global.getLocaleMessage<{ antdLocale: Locale }>(unref(getLocale))
+    const localeMessage = i18n.global.getLocaleMessage<{ antdLocale: Locale }>(unref(getLocale));
     return localeMessage?.antdLocale ?? {}
   })
 

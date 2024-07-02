@@ -1,6 +1,6 @@
 <template>
   <div class="p-4">
-    <BasicTable @register="registerTable">
+    <BasicTable @register="registerTable" >
       <template #bodyCell="{ column, record }">
         <template v-if="column.dataIndex === 'mores'">
           <Button size="small" type="primary" @click="handleRemove(record, column)"> 删除</Button>
@@ -12,349 +12,12 @@
   </div>
 </template>
 <script lang="ts" setup>
-import { useTable } from '@/components/Table';
+import { useTable ,BasicTable} from '@/components/Table';
 import { searchFormSchema,columns } from "./formData"
-
+import treeJson from './tree'
 const demoListApi = () => {
   return new Promise((resolve) => {
-    resolve({
-      "total": 1063,
-      "current": 1,
-      "size": 10,
-      "code": 0,
-      "list": [
-        {
-          "id": 1479,
-          "classType": "创新",
-          "kjType": "S",
-          "lecture": 6,
-          "year": "2024",
-          "location": null,
-          "subject": "数学",
-          "grade": "G1",
-          "lectureName": "美食总动员",
-          "version": "1.1",
-          "count": null,
-          "challengeId": 30,
-          "challengeName": "减法算式",
-          "edition": "TEA",
-          "type": 0,
-          "typeName": "正式课-长期班",
-          "uploadStatus": 1,
-          "courseType": 0,
-          "lockStatus": 0,
-          "isOnline": 1,
-          "knowledgeName": "默认知识点",
-          "editTime": null,
-          "keJianUrl": "https://app.thinkworldpro.com/get/url/kejian/Courseware2.0/index.html?type=test&kjId=1479&names=0&token=eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJhdWQiOiIxODgiLCJUYWciOiJSRUZfVE9LRU4iLCJVVUlEIjoiNzE3NzllMDAtYjM4NS00NTQ2LWJjYTEtODY1Y2MzM2JiYTgzIiwiZXhwIjoxNzE3MDYxOTY1LCJhY2NvdW50IjoiMTgzMjYwOTkwMjcifQ.KljdpJXk4nYntBqRNPXAJF2wWdvVEXIWSDiAo81LMj0",
-          "keJianNamesUrl": null,
-          "editStatus": null,
-          "feedbackCount": 0,
-          "feedbackTime": null,
-          "feedbackStatus": 0,
-          "topSort": 1,
-          "urlType": 1,
-          "url": "https://app.thinkworldpro.com/get/url/kejian/Courseware2.0/index.html?type=test&kjId="
-        },
-        {
-          "id": 1390,
-          "classType": "培优",
-          "kjType": "S",
-          "lecture": 11,
-          "year": "2024",
-          "location": null,
-          "subject": "英语",
-          "grade": "G1",
-          "lectureName": "My family",
-          "version": "1.0",
-          "count": null,
-          "challengeId": null,
-          "challengeName": null,
-          "edition": "TEA",
-          "type": 0,
-          "typeName": "正式课-长期班",
-          "uploadStatus": 1,
-          "courseType": 0,
-          "lockStatus": 0,
-          "isOnline": 1,
-          "knowledgeName": "英语题目",
-          "editTime": null,
-          "keJianUrl": "https://app.thinkworldpro.com/get/url/kejian/Courseware2.0/index.html?type=test&kjId=1390&names=0&token=eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJhdWQiOiIxODgiLCJUYWciOiJSRUZfVE9LRU4iLCJVVUlEIjoiNzE3NzllMDAtYjM4NS00NTQ2LWJjYTEtODY1Y2MzM2JiYTgzIiwiZXhwIjoxNzE3MDYxOTY1LCJhY2NvdW50IjoiMTgzMjYwOTkwMjcifQ.KljdpJXk4nYntBqRNPXAJF2wWdvVEXIWSDiAo81LMj0",
-          "keJianNamesUrl": null,
-          "editStatus": null,
-          "feedbackCount": 0,
-          "feedbackTime": null,
-          "feedbackStatus": 0,
-          "topSort": 1,
-          "urlType": 1,
-          "url": "https://app.thinkworldpro.com/get/url/kejian/Courseware2.0/index.html?type=test&kjId="
-        },
-        {
-          "id": 1389,
-          "classType": "培优",
-          "kjType": "S",
-          "lecture": 10,
-          "year": "2024",
-          "location": null,
-          "subject": "英语",
-          "grade": "G1",
-          "lectureName": "My family",
-          "version": "1.0",
-          "count": null,
-          "challengeId": null,
-          "challengeName": null,
-          "edition": "TEA",
-          "type": 0,
-          "typeName": "正式课-长期班",
-          "uploadStatus": 1,
-          "courseType": 0,
-          "lockStatus": 0,
-          "isOnline": 1,
-          "knowledgeName": "英语题目",
-          "editTime": null,
-          "keJianUrl": "https://app.thinkworldpro.com/get/url/kejian/Courseware2.0/index.html?type=test&kjId=1389&names=0&token=eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJhdWQiOiIxODgiLCJUYWciOiJSRUZfVE9LRU4iLCJVVUlEIjoiNzE3NzllMDAtYjM4NS00NTQ2LWJjYTEtODY1Y2MzM2JiYTgzIiwiZXhwIjoxNzE3MDYxOTY1LCJhY2NvdW50IjoiMTgzMjYwOTkwMjcifQ.KljdpJXk4nYntBqRNPXAJF2wWdvVEXIWSDiAo81LMj0",
-          "keJianNamesUrl": null,
-          "editStatus": null,
-          "feedbackCount": 0,
-          "feedbackTime": null,
-          "feedbackStatus": 0,
-          "topSort": 1,
-          "urlType": 1,
-          "url": "https://app.thinkworldpro.com/get/url/kejian/Courseware2.0/index.html?type=test&kjId="
-        },
-        {
-          "id": 1388,
-          "classType": "培优",
-          "kjType": "S",
-          "lecture": 9,
-          "year": "2024",
-          "location": null,
-          "subject": "英语",
-          "grade": "G1",
-          "lectureName": "Where’s Monty?",
-          "version": "1.0",
-          "count": null,
-          "challengeId": null,
-          "challengeName": null,
-          "edition": "TEA",
-          "type": 0,
-          "typeName": "正式课-长期班",
-          "uploadStatus": 1,
-          "courseType": 0,
-          "lockStatus": 0,
-          "isOnline": 1,
-          "knowledgeName": "英语题目",
-          "editTime": null,
-          "keJianUrl": "https://app.thinkworldpro.com/get/url/kejian/Courseware2.0/index.html?type=test&kjId=1388&names=0&token=eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJhdWQiOiIxODgiLCJUYWciOiJSRUZfVE9LRU4iLCJVVUlEIjoiNzE3NzllMDAtYjM4NS00NTQ2LWJjYTEtODY1Y2MzM2JiYTgzIiwiZXhwIjoxNzE3MDYxOTY1LCJhY2NvdW50IjoiMTgzMjYwOTkwMjcifQ.KljdpJXk4nYntBqRNPXAJF2wWdvVEXIWSDiAo81LMj0",
-          "keJianNamesUrl": null,
-          "editStatus": null,
-          "feedbackCount": 0,
-          "feedbackTime": null,
-          "feedbackStatus": 0,
-          "topSort": 1,
-          "urlType": 1,
-          "url": "https://app.thinkworldpro.com/get/url/kejian/Courseware2.0/index.html?type=test&kjId="
-        },
-        {
-          "id": 1387,
-          "classType": "培优",
-          "kjType": "S",
-          "lecture": 8,
-          "year": "2024",
-          "location": null,
-          "subject": "英语",
-          "grade": "G1",
-          "lectureName": "Where’s the ball?",
-          "version": "1.0",
-          "count": null,
-          "challengeId": null,
-          "challengeName": null,
-          "edition": "TEA",
-          "type": 0,
-          "typeName": "正式课-长期班",
-          "uploadStatus": 1,
-          "courseType": 0,
-          "lockStatus": 0,
-          "isOnline": 1,
-          "knowledgeName": "英语题目",
-          "editTime": null,
-          "keJianUrl": "https://app.thinkworldpro.com/get/url/kejian/Courseware2.0/index.html?type=test&kjId=1387&names=0&token=eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJhdWQiOiIxODgiLCJUYWciOiJSRUZfVE9LRU4iLCJVVUlEIjoiNzE3NzllMDAtYjM4NS00NTQ2LWJjYTEtODY1Y2MzM2JiYTgzIiwiZXhwIjoxNzE3MDYxOTY1LCJhY2NvdW50IjoiMTgzMjYwOTkwMjcifQ.KljdpJXk4nYntBqRNPXAJF2wWdvVEXIWSDiAo81LMj0",
-          "keJianNamesUrl": null,
-          "editStatus": null,
-          "feedbackCount": 0,
-          "feedbackTime": null,
-          "feedbackStatus": 0,
-          "topSort": 1,
-          "urlType": 1,
-          "url": "https://app.thinkworldpro.com/get/url/kejian/Courseware2.0/index.html?type=test&kjId="
-        },
-        {
-          "id": 1386,
-          "classType": "培优",
-          "kjType": "S",
-          "lecture": 7,
-          "year": "2024",
-          "location": null,
-          "subject": "英语",
-          "grade": "G1",
-          "lectureName": "My toys",
-          "version": "1.0",
-          "count": null,
-          "challengeId": null,
-          "challengeName": null,
-          "edition": "TEA",
-          "type": 0,
-          "typeName": "正式课-长期班",
-          "uploadStatus": 1,
-          "courseType": 0,
-          "lockStatus": 0,
-          "isOnline": 1,
-          "knowledgeName": "英语题目",
-          "editTime": null,
-          "keJianUrl": "https://app.thinkworldpro.com/get/url/kejian/Courseware2.0/index.html?type=test&kjId=1386&names=0&token=eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJhdWQiOiIxODgiLCJUYWciOiJSRUZfVE9LRU4iLCJVVUlEIjoiNzE3NzllMDAtYjM4NS00NTQ2LWJjYTEtODY1Y2MzM2JiYTgzIiwiZXhwIjoxNzE3MDYxOTY1LCJhY2NvdW50IjoiMTgzMjYwOTkwMjcifQ.KljdpJXk4nYntBqRNPXAJF2wWdvVEXIWSDiAo81LMj0",
-          "keJianNamesUrl": null,
-          "editStatus": null,
-          "feedbackCount": 0,
-          "feedbackTime": null,
-          "feedbackStatus": 0,
-          "topSort": 1,
-          "urlType": 1,
-          "url": "https://app.thinkworldpro.com/get/url/kejian/Courseware2.0/index.html?type=test&kjId="
-        },
-        {
-          "id": 1385,
-          "classType": "培优",
-          "kjType": "S",
-          "lecture": 6,
-          "year": "2024",
-          "location": null,
-          "subject": "英语",
-          "grade": "G1",
-          "lectureName": "My school",
-          "version": "1.0",
-          "count": null,
-          "challengeId": null,
-          "challengeName": null,
-          "edition": "TEA",
-          "type": 0,
-          "typeName": "正式课-长期班",
-          "uploadStatus": 1,
-          "courseType": 0,
-          "lockStatus": 0,
-          "isOnline": 1,
-          "knowledgeName": "英语题目",
-          "editTime": null,
-          "keJianUrl": "https://app.thinkworldpro.com/get/url/kejian/Courseware2.0/index.html?type=test&kjId=1385&names=0&token=eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJhdWQiOiIxODgiLCJUYWciOiJSRUZfVE9LRU4iLCJVVUlEIjoiNzE3NzllMDAtYjM4NS00NTQ2LWJjYTEtODY1Y2MzM2JiYTgzIiwiZXhwIjoxNzE3MDYxOTY1LCJhY2NvdW50IjoiMTgzMjYwOTkwMjcifQ.KljdpJXk4nYntBqRNPXAJF2wWdvVEXIWSDiAo81LMj0",
-          "keJianNamesUrl": null,
-          "editStatus": null,
-          "feedbackCount": 0,
-          "feedbackTime": null,
-          "feedbackStatus": 0,
-          "topSort": 1,
-          "urlType": 1,
-          "url": "https://app.thinkworldpro.com/get/url/kejian/Courseware2.0/index.html?type=test&kjId="
-        },
-        {
-          "id": 1384,
-          "classType": "培优",
-          "kjType": "S",
-          "lecture": 5,
-          "year": "2024",
-          "location": null,
-          "subject": "英语",
-          "grade": "G1",
-          "lectureName": "Let’s colour",
-          "version": "1.0",
-          "count": null,
-          "challengeId": null,
-          "challengeName": null,
-          "edition": "TEA",
-          "type": 0,
-          "typeName": "正式课-长期班",
-          "uploadStatus": 1,
-          "courseType": 0,
-          "lockStatus": 1,
-          "isOnline": 1,
-          "knowledgeName": "英语题目",
-          "editTime": null,
-          "keJianUrl": "https://app.thinkworldpro.com/get/url/kejian/Courseware2.0/index.html?type=test&kjId=1384&names=0&token=eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJhdWQiOiIxODgiLCJUYWciOiJSRUZfVE9LRU4iLCJVVUlEIjoiNzE3NzllMDAtYjM4NS00NTQ2LWJjYTEtODY1Y2MzM2JiYTgzIiwiZXhwIjoxNzE3MDYxOTY1LCJhY2NvdW50IjoiMTgzMjYwOTkwMjcifQ.KljdpJXk4nYntBqRNPXAJF2wWdvVEXIWSDiAo81LMj0",
-          "keJianNamesUrl": null,
-          "editStatus": null,
-          "feedbackCount": 0,
-          "feedbackTime": null,
-          "feedbackStatus": 0,
-          "topSort": 1,
-          "urlType": 1,
-          "url": "https://app.thinkworldpro.com/get/url/kejian/Courseware2.0/index.html?type=test&kjId="
-        },
-        {
-          "id": 1383,
-          "classType": "培优",
-          "kjType": "S",
-          "lecture": 4,
-          "year": "2024",
-          "location": null,
-          "subject": "英语",
-          "grade": "G1",
-          "lectureName": "The rainbow",
-          "version": "1.0",
-          "count": null,
-          "challengeId": null,
-          "challengeName": null,
-          "edition": "TEA",
-          "type": 0,
-          "typeName": "正式课-长期班",
-          "uploadStatus": 1,
-          "courseType": 0,
-          "lockStatus": 1,
-          "isOnline": 1,
-          "knowledgeName": "英语题目",
-          "editTime": null,
-          "keJianUrl": "https://app.thinkworldpro.com/get/url/kejian/Courseware2.0/index.html?type=test&kjId=1383&names=0&token=eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJhdWQiOiIxODgiLCJUYWciOiJSRUZfVE9LRU4iLCJVVUlEIjoiNzE3NzllMDAtYjM4NS00NTQ2LWJjYTEtODY1Y2MzM2JiYTgzIiwiZXhwIjoxNzE3MDYxOTY1LCJhY2NvdW50IjoiMTgzMjYwOTkwMjcifQ.KljdpJXk4nYntBqRNPXAJF2wWdvVEXIWSDiAo81LMj0",
-          "keJianNamesUrl": null,
-          "editStatus": null,
-          "feedbackCount": 0,
-          "feedbackTime": null,
-          "feedbackStatus": 0,
-          "topSort": 1,
-          "urlType": 1,
-          "url": "https://app.thinkworldpro.com/get/url/kejian/Courseware2.0/index.html?type=test&kjId="
-        },
-        {
-          "id": 1382,
-          "classType": "培优",
-          "kjType": "S",
-          "lecture": 3,
-          "year": "2024",
-          "location": null,
-          "subject": "英语",
-          "grade": "G1",
-          "lectureName": "My friends",
-          "version": "1.0",
-          "count": null,
-          "challengeId": null,
-          "challengeName": null,
-          "edition": "TEA",
-          "type": 0,
-          "typeName": "正式课-长期班",
-          "uploadStatus": 1,
-          "courseType": 0,
-          "lockStatus": 0,
-          "isOnline": 1,
-          "knowledgeName": "英语题目",
-          "editTime": null,
-          "keJianUrl": "https://app.thinkworldpro.com/get/url/kejian/Courseware2.0/index.html?type=test&kjId=1382&names=0&token=eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJhdWQiOiIxODgiLCJUYWciOiJSRUZfVE9LRU4iLCJVVUlEIjoiNzE3NzllMDAtYjM4NS00NTQ2LWJjYTEtODY1Y2MzM2JiYTgzIiwiZXhwIjoxNzE3MDYxOTY1LCJhY2NvdW50IjoiMTgzMjYwOTkwMjcifQ.KljdpJXk4nYntBqRNPXAJF2wWdvVEXIWSDiAo81LMj0",
-          "keJianNamesUrl": null,
-          "editStatus": null,
-          "feedbackCount": 0,
-          "feedbackTime": null,
-          "feedbackStatus": 0,
-          "topSort": 1,
-          "urlType": 1,
-          "url": "https://app.thinkworldpro.com/get/url/kejian/Courseware2.0/index.html?type=test&kjId="
-        }
-      ]
-    })
+  resolve(treeJson)
   })
 }
 
@@ -364,13 +27,61 @@ const resetFuncs = async () => {
   })
 }
 
+ const handleTree=(data: any[], id?: string, parentId?: string, children?: string)=>{
+  if (!Array.isArray(data)) {
+    console.warn('data must be an array')
+    return []
+  }
+  const config = {
+    id: id || 'id',
+    parentId: parentId || 'parentId',
+    childrenList: children || 'children',
+  }
 
+  const childrenListMap = {}
+  const nodeIds = {}
+  const tree: any[] = []
 
+  for (const d of data) {
+    const parentId = d[config.parentId]
+    if (childrenListMap[parentId] == null)
+      childrenListMap[parentId] = []
+
+    nodeIds[d[config.id]] = d
+    childrenListMap[parentId].push(d)
+  }
+
+  for (const d of data) {
+    const parentId = d[config.parentId]
+    if (nodeIds[parentId] == null)
+      tree.push(d)
+  }
+
+  for (const t of tree)
+    adaptToChildrenList(t)
+
+  function adaptToChildrenList(o) {
+    if (childrenListMap[o[config.id]] !== null)
+      o[config.childrenList] = childrenListMap[o[config.id]]
+
+    if (o[config.childrenList]) {
+      for (const c of o[config.childrenList])
+        adaptToChildrenList(c)
+    }
+  }
+  return tree
+}
+
+const getList =async()=>{
+  const list =await demoListApi();
+  return handleTree(list as any[],'id')
+}
 const [registerTable] = useTable({
   title: 'TableAction组件及固定列示例',
-  api: demoListApi,
+  api: getList,
   columns: columns,
   bordered: true,
+  isTreeTable:true,
   formConfig: {
     labelWidth: 120,
     schemas: searchFormSchema,

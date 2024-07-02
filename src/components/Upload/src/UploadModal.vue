@@ -41,7 +41,6 @@ const { getStringAccept, getHelpText } = useUploadType({
   maxNumberRef: maxNumber,
   maxSizeRef: maxSize,
 })
-
 const { createMessage } = useMessage()
 
 const getIsSelectFile = computed(() => {
